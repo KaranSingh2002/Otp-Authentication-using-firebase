@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Authentication</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>OTP Authentication</h1>
+        <div class="login-container">
+            <input type="text" id="phone" placeholder="Enter your phone number">
+            <button onclick="sendOTP()">Send OTP</button>
+            <input type="text" id="verificationCode" placeholder="Enter OTP">
+            <button onclick="verifyOTP()">Verify OTP</button>
+            <p id="status"></p>
+        </div>
+    </div>
+
+    <!-- Include the Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
+
+    <!-- Replace with your Firebase project configuration -->
+    <script>
+        var firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- Add your main.js file -->
+    <script src="main.js"></script>
+</body>
+</html>
