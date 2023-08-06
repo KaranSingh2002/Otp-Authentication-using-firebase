@@ -1,0 +1,34 @@
+// Function to send OTP
+function sendOTP() {
+    var phoneNumber = document.getElementById('phone').value;
+    var appVerifier = new firebase.auth.RecaptchaVerifier('login-container', {
+        size: 'invisible',
+        callback: function(response) {
+            // reCAPTCHA solved, allow signInWithPhoneNumber.
+            sendVerificationCode();
+        }
+    });
+    firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then(function(confirmationResult) {
+            window.confirmationResult = confirmationResult;
+            document.getElementById('status').innerHTML = 'OTP sent to ' + phoneNumber;
+        })
+        .catch(function(error) {
+            document.getElementById('status').innerHTML = 'Error: ' + error.message;
+        });
+}
+
+// Function to verify OTP
+function verifyOTP() {
+    var verificationCode = document.getElementById('verificationCode').value;
+    confirmationResult.confirm(verificationCode)
+        .then(function(result) {
+            // User successfully signed in with the verification code
+            var user = result.user;
+            document.getElementById('status').innerHTML = 'OTP verified! Welcome, ' + user.phoneNumber;
+        })
+        .catch(function(error) {
+            // Incorrect verification code
+            document.getElementById('status').innerHTML = 'Error: ' + error.message;
+        });
+}
